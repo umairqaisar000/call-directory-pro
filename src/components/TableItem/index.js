@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import axios from "../../utils/axios";
+import { submitNote, archiveCall } from "../../api/Note";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
@@ -20,44 +19,29 @@ const TableItem = ({ item, handleShow, handleClose, show, updateData }) => {
   const handleNoteSubmit = async (event) => {
     event.preventDefault();
     const accessToken = localStorage.getItem("token");
-
     const callId = item.id; // Replace with the actual call ID
-    const url = `/calls/${callId}/note`;
-    const requestBody = { content: noteContent };
 
     try {
-      const response = await axios.post(url, requestBody, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      await submitNote(callId, noteContent, accessToken);
       updateData();
       setNoteContent("");
       handleClose();
     } catch (error) {
-      console.error(error);
       handleClose();
     }
   };
 
   const handleArchive = async () => {
     const accessToken = localStorage.getItem("token");
-
     const callId = item.id;
-    const url = `/calls/${callId}/archive`;
 
     try {
-      const response = await axios.put(url, null, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      await archiveCall(callId, accessToken);
       updateData();
     } catch (error) {
       console.error(error);
     }
   };
-
   const handleStatus = (status) => {
     if (status) {
       return (
