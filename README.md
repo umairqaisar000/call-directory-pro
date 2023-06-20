@@ -1,6 +1,6 @@
-# TuringTech Frontend Technical Test
+# Phone Directory Application
 
-This repository contains the solution to the Frontend technical test for the Frontend Engineer position at TuringTech. The test involves building a small part of the main application, which is a business phone system. The application displays a paginated list of calls retrieved from an API, allows users to view call details, archive calls, and handles real-time events.
+It is a business phone system. The application displays a paginated list of calls retrieved from an API, allows users to view call details, archives calls, and handles real-time events.
 
 ## Table of Contents
 
